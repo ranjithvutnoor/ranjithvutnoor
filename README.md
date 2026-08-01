@@ -948,7 +948,7 @@ I am open to conversations about:
 
 * **Kaggle:** [View my profile](https://www.kaggle.com/ranjithvutnoor)
 
-* **Portfolio:** [Visit my portfolio](availablebesoon)
+* **Portfolio:** [Visit my portfolio](https://ranjithvutnoor.github.io/portfolio/)
 
 ---
 
