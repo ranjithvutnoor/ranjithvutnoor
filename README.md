@@ -8,10 +8,10 @@
 
 I build and explore intelligent systems at the intersection of **machine learning, information retrieval, large language models, GPU-accelerated computing, software engineering, and applied research**.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge\&logo=linkedin\&logoColor=white)](YOUR_LINKEDIN_URL)
-[![LeetCode](https://img.shields.io/badge/LeetCode-Profile-FFA116?style=for-the-badge\&logo=leetcode\&logoColor=black)](YOUR_LEETCODE_URL)
-[![Kaggle](https://img.shields.io/badge/Kaggle-Profile-20BEFF?style=for-the-badge\&logo=kaggle\&logoColor=white)](YOUR_KAGGLE_URL)
-[![Email](https://img.shields.io/badge/Email-Contact-EA4335?style=for-the-badge\&logo=gmail\&logoColor=white)](mailto:YOUR_EMAIL_ADDRESS)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge\&logo=linkedin\&logoColor=white)](https://www.linkedin.com/in/ranjithvutnoor/)
+[![LeetCode](https://img.shields.io/badge/LeetCode-Profile-FFA116?style=for-the-badge\&logo=leetcode\&logoColor=black)](https://leetcode.com/u/ranjithvutnoor/)
+[![Kaggle](https://img.shields.io/badge/Kaggle-Profile-20BEFF?style=for-the-badge\&logo=kaggle\&logoColor=white)](https://www.kaggle.com/ranjithvutnoor/)
+[![Email](https://img.shields.io/badge/Email-Contact-EA4335?style=for-the-badge\&logo=gmail\&logoColor=white)](mailto:ranjithvutnoor@gmail.com)
 
 </div>
 
@@ -608,7 +608,8 @@ Representative problems include:
 * Validate Binary Search Tree
 * Recover Binary Search Tree
 
-[![LeetCode](https://img.shields.io/badge/View%20My%20LeetCode-FFA116?style=for-the-badge\&logo=leetcode\&logoColor=black)](YOUR_LEETCODE_URL)
+[![LeetCode](https://img.shields.io/badge/View%20My%20LeetCode-FFA116?style=for-the-badge\&logo=leetcode\&logoColor=black)](https://leetcode.com/u/ranjithvutnoor/
+)
 
 ---
 
@@ -832,9 +833,7 @@ Research implementation and documentation based on my IIT Bhilai M.Tech thesis o
 
 **Technologies:** Python, PyTorch, CUDA, MSCRED, ConvLSTM, GEMM, time-series analysis, anomaly detection
 
-[View Repository](YOUR_THESIS_REPOSITORY_URL) · [Read Thesis](YOUR_THESIS_PDF_URL)
-
-> Publish only code and data that you are authorised to share. Use synthetic or anonymised data when the original industrial dataset is restricted.
+[View Repository](https://ranjithvutnoor.github.io/portfolio/case-studies/cuda-mscred.html) · [Read Thesis](https://ranjithvutnoor.github.io/portfolio/case-studies/cuda-mscred.html)
 
 ---
 
@@ -846,7 +845,7 @@ A reproducible project documenting synthetic reasoning-data generation, compact 
 
 **Technologies:** Python, PyTorch, Transformers, PEFT, QLoRA, bitsandbytes, TRL, Accelerate, Safetensors, vLLM
 
-[View Repository](YOUR_NEMOTRON_REPOSITORY_URL) · [View Competition](https://www.kaggle.com/competitions/nvidia-nemotron-model-reasoning-challenge)
+[View Repository](https://github.com/ranjithvutnoor/nvidia-nemotron-model-reasoning-challenge.git) · [View Competition](https://www.kaggle.com/competitions/nvidia-nemotron-model-reasoning-challenge)
 
 ---
 
@@ -856,7 +855,7 @@ An evaluation-oriented RAG project demonstrating document ingestion, vector sear
 
 **Technologies:** Python, Qdrant, embeddings, LLMs, information retrieval
 
-[View Repository](YOUR_RAG_REPOSITORY_URL)
+[View Repository](https://ranjithvutnoor.github.io/portfolio/case-studies/evalstudio.html)
 
 ---
 
@@ -886,7 +885,7 @@ A collection of academic and independent machine-learning experiments, notebooks
 
 **Technologies:** Python, machine learning, data analysis, Jupyter
 
-[View Repository](YOUR_ML_REPOSITORY_URL)
+[View Repository](https://ranjithvutnoor.github.io/portfolio/case-studies/enterprise-rag.html)
 
 ---
 
@@ -948,7 +947,7 @@ I am open to conversations about:
 
 * **Kaggle:** [View my profile](https://www.kaggle.com/ranjithvutnoor)
 
-* **Portfolio:** [Visit my portfolio](availablebesoon)
+* **Portfolio:** [Visit my portfolio](https://ranjithvutnoor.github.io/portfolio/index.html)
 
 ---
 
