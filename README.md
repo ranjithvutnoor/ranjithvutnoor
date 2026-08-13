@@ -255,20 +255,19 @@ The shared-memory GPU implementation achieved approximately:
 
 [![Kaggle Competition](https://img.shields.io/badge/Kaggle-NVIDIA%20Nemotron%20Reasoning%20Challenge-20BEFF?style=flat-square&logo=kaggle&logoColor=white)](https://www.kaggle.com/competitions/nvidia-nemotron-model-reasoning-challenge)
 
-Participated in NVIDIA's structured-reasoning competition using the **Nemotron-3-Nano-30B** open model. The objective was to improve reasoning accuracy and submit a compatible **LoRA adapter with rank no greater than 32**, evaluated through deterministic vLLM inference and final-answer extraction from `\boxed{}` output.
-
-#### Result
-
-* Improved the competition score from approximately **0.53 to 0.668** through repeated data, prompting, training, and packaging iterations
-* Finished at approximately **public leaderboard rank 3,345** and **private leaderboard rank 3,020**
-* Gained approximately **325 positions** during the public-to-private leaderboard transition
-* Competed in a field of more than **4,100 teams** and over **71,000 submissions**
+Participated in NVIDIA's structured-reasoning competition using the **Nemotron-3-Nano-30B** model family. The objective was to improve reasoning accuracy and submit a compatible **LoRA adapter with rank no greater than 32**, evaluated through deterministic vLLM inference and final-answer extraction from `\boxed{}` output.
 
 #### Problem statement
 
 The benchmark tested whether a language model could infer hidden rules from worked examples and apply the discovered rule to a new query. The tasks required more than general language generation: the model needed to identify the task family, infer the latent transformation, verify its hypothesis against the examples, perform the final computation, and return the exact answer in the required format.
 
 The challenge allowed prompting, data curation, synthetic-data generation, reinforcement learning, and lightweight fine-tuning. My approach focused on **reasoning-oriented synthetic data engineering and QLoRA-style supervised fine-tuning** rather than full-parameter fine-tuning or reinforcement learning.
+
+#### Result
+
+* Achieved a **0.676 public leaderboard score**, ranking **2,695**
+* Achieved a **0.668 final private leaderboard score**, ranking **3,020**
+* Completed two compute-intensive QLoRA training and submission cycles; Kaggle displays the first run with an error status despite recording **0.532 public / 0.536 private** scores
 
 #### My approach
 
@@ -279,7 +278,7 @@ The challenge allowed prompting, data curation, synthetic-data generation, reinf
 5. **Applied 4-bit QLoRA-style parameter-efficient fine-tuning** to the Nemotron base model using the Hugging Face ecosystem.
 6. **Resolved model-architecture and low-precision compatibility problems** involving Mamba kernels, RMSNorm fallbacks, Mixture-of-Experts dtype mismatches, and 4-bit execution.
 7. **Evaluated multiple checkpoints and iterations**, selected the strongest adapter checkpoint, validated the required files, and packaged the submission in Kaggle's expected format.
-8. **Used leaderboard feedback and error analysis** to refine the data distribution, reasoning format, and final-answer reliability.
+8. **Used limited leaderboard feedback and error analysis** to refine the data distribution, reasoning format, and final-answer reliability.
 
 #### Reasoning-data design
 
@@ -335,21 +334,58 @@ Important design decisions included:
 * Testing candidate mappings against vocabulary and all examples
 * Inferring custom arithmetic operators through difference tables, algebraic decomposition, and hypothesis competition
 
-#### QLoRA-style fine-tuning pipeline
+#### QLoRA training experiments
 
-This was **parameter-efficient fine-tuning**, not full-model retraining:
+| Parameter | Training Run 1 | Training Run 2 |
+|---|---|---|
+| Base model | Nemotron-3-Nano-30B-A3B | Nemotron-3-Nano-30B |
+| Model scale | 30B parameters, ~3B active | 30B-class model |
+| Quantization | 4-bit QLoRA | 4-bit NF4 QLoRA |
+| LoRA rank | 32 | 32 |
+| LoRA alpha | 16 | 64 |
+| Target modules | `in_proj`, `out_proj`, `up_proj`, `down_proj` | `in_proj`, `out_proj` |
+| Optimizer | — | Adafactor |
+| Learning rate | 2e-4 | 2e-4 |
+| Scheduler | Cosine | Cosine |
+| Epochs | 3 | 3 |
+| Training examples | 1,151 | — |
+| Effective batch size | 4 | 16 (`4 × 4` accumulation) |
+| Final training loss | 0.185 | — |
+| Hardware | NVIDIA H100 SXM 80 GB | — |
+| Training time | ~3 hours | — |
+| Public score | 0.532 | **0.676** |
+| Private score | 0.536 | **0.668** |
+| Kaggle status | Error shown by Kaggle | **Complete** |
 
-* Loaded the Nemotron model for **4-bit low-memory training**
-* Used **PEFT LoRA adapters** so that only a small set of adapter parameters was trained
+The two runs were deliberately different rather than simple repetitions. The second configuration changed the LoRA scaling, projection targets, optimizer, and effective batch size.
+
+Across the two submission cycles, the public score improved from **0.532 to 0.676**, while the private score improved from **0.536 to 0.668**.
+
+Full training runs on a 30B-class model were computationally expensive, so experimentation focused on reasoning-data preparation, controlled configuration changes, offline checkpoint evaluation, and model compatibility work rather than frequent leaderboard submissions.
+
+**Fine-tuning and packaging workflow**
+
+* Used **PEFT LoRA adapters** for parameter-efficient fine-tuning rather than full-model retraining
 * Used the Hugging Face stack: `Transformers`, `PEFT`, `bitsandbytes`, `TRL`, `Accelerate`, and `Safetensors`
 * Performed supervised fine-tuning on structured synthetic reasoning traces
 * Preserved the competition requirement that the final adapter rank be no greater than 32
-* Selected `checkpoint-1056` as the final adapter checkpoint in the submission workflow
+* Evaluated intermediate checkpoints offline and selected `checkpoint-1056` for the final adapter
 * Cast trainable adapter weights to `float16` for compact packaging
-* Verified the presence of `adapter_config.json` and `adapter_model.safetensors`
-* Packaged only the required adapter files into `submission.zip`
+* Verified `adapter_config.json` and `adapter_model.safetensors`, then packaged only the required files into `submission.zip`
 
-> Exact values for LoRA rank, alpha, dropout, learning rate, batch size, gradient accumulation, sequence length, and epoch count should be added from the final training script or `adapter_config.json`. They should not be guessed from the competition limits.
+#### Leaderboard evidence
+
+**Submission history**
+
+![Nemotron Kaggle submission history](assets/nemotron/submissions.png)
+
+**Public leaderboard — Score 0.676, Rank 2,695**
+
+![Nemotron public leaderboard](assets/nemotron/public-leaderboard.png)
+
+**Final private leaderboard — Score 0.668, Rank 3,020**
+
+![Nemotron final private leaderboard](assets/nemotron/final-leaderboard.png)
 
 #### Engineering problems solved
 
@@ -380,7 +416,7 @@ The Nemotron architecture required additional engineering for QLoRA-style execut
 
 #### Technologies
 
-`Python` · `PyTorch` · `Transformers` · `PEFT` · `QLoRA` · `LoRA` · `bitsandbytes` · `TRL` · `Accelerate` · `Safetensors` · `vLLM` · `Synthetic Data` · `Reasoning Evaluation` · `RunPod` · `NVIDIA GPUs`
+`Python` · `PyTorch` · `Transformers` · `PEFT` · `QLoRA` · `LoRA` · `bitsandbytes` · `TRL` · `Accelerate` · `Adafactor` · `Safetensors` · `vLLM` · `Synthetic Data` · `Reasoning Evaluation` · `RunPod` · `NVIDIA H100`
 
 ---
 
