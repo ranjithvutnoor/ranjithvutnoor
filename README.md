@@ -264,8 +264,6 @@ Participated in NVIDIA's structured-reasoning competition using the **Nemotron-3
 * Gained approximately **325 positions** during the public-to-private leaderboard transition
 * Competed in a field of more than **4,100 teams** and over **71,000 submissions**
 
-> Leaderboard positions can change when late submissions or display rules are applied. Keep a screenshot of the final leaderboard result in the project repository as supporting evidence.
-
 #### Problem statement
 
 The benchmark tested whether a language model could infer hidden rules from worked examples and apply the discovered rule to a new query. The tasks required more than general language generation: the model needed to identify the task family, infer the latent transformation, verify its hypothesis against the examples, perform the final computation, and return the exact answer in the required format.
