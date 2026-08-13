@@ -373,19 +373,24 @@ Full training runs on a 30B-class model were computationally expensive, so exper
 * Cast trainable adapter weights to `float16` for compact packaging
 * Verified `adapter_config.json` and `adapter_model.safetensors`, then packaged only the required files into `submission.zip`
 
-#### Leaderboard evidence
+<details>
+<summary><strong>Leaderboard evidence</strong></summary>
+
+<br>
 
 **Submission history**
 
-![Nemotron Kaggle submission history](assets/nemotron/submissions.png)
+![Nemotron submission history](assets/nemotron/submissions.png)
 
-**Public leaderboard — Score 0.676, Rank 2,695**
+**Public leaderboard — 0.676, Rank 2,695**
 
 ![Nemotron public leaderboard](assets/nemotron/public-leaderboard.png)
 
-**Final private leaderboard — Score 0.668, Rank 3,020**
+**Final private leaderboard — 0.668, Rank 3,020**
 
-![Nemotron final private leaderboard](assets/nemotron/final-leaderboard.png)
+![Nemotron final leaderboard](assets/nemotron/final-leaderboard.png)
+
+</details>
 
 #### Engineering problems solved
 
